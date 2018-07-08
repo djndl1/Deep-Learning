@@ -1,0 +1,358 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "times" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5cm
+\topmargin 1.5cm
+\rightmargin 1.5cm
+\bottommargin 1.5cm
+\secnumdepth 3
+\tocdepth 4
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted5.png
+	lyxscale 80
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Knowledge base approach: 
+\emph default
+Reasoning automatically about statements in fomral languages using logical
+ inference rules, seeking to hardcode knowledge about the world in formal
+ languages.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Machine learning: 
+\emph default
+AI systems need the ability to acquire their own knowledge by extracting
+ patterns from raw data.
+ The introduction of machine learning enabled computers to tackle problems
+ involving knowledge of the real world and make decisions that appear subjective.
+\end_layout
+
+\begin_layout Standard
+The performance of simple machine learning algorithms depends heavily on
+ the representation of the data they are given.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Representation learning: 
+\emph default
+Machine learning can discover not only the mapping from representation to
+ output but also the representation itself, which enables AI systems to
+ rapidly adapt to new tasks, with minimal human intervention.
+ 
+\end_layout
+
+\begin_layout Standard
+e.g.
+ 
+\series bold
+autoencoder: 
+\series default
+both the encoder and the decoder are trained to make the new representation
+ ahve various nice properties.
+\end_layout
+
+\begin_layout Standard
+It can be very difficult to extract such high-level, abstract features from
+ raw data.
+ Deep learning solves this central problem in representation learning by
+ intro- ducing representations that are expressed in terms of other, simpler
+ representations.
+ 
+\end_layout
+
+\begin_layout Standard
+e.g.
+ 
+\series bold
+multilayer perceptron.
+\end_layout
+
+\begin_layout Standard
+The idea of learning the right representation for the data provides one
+ per- spective on deep learning.
+ Another perspective on deep learning is that depth enables the computer
+ to learn a multistep computer program.
+\end_layout
+
+\begin_layout Standard
+There are two main ways of measuring the depth of a model.
+ The first view is based on the number of sequential instructions that must
+ be executed to evaluate the architecture.
+ Another approach, used by deep probabilistic models, regards the depth
+ of a model as being not the depth of the computational graph but the depth
+ of the graph describing how concepts are related to each other.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted6.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+From cybernetics, connectionism to deep learning
+\end_layout
+
+\begin_layout Standard
+Computational models of biological learning, models of how learning happens
+ or could happen in the brain (ANNs)
+\end_layout
+
+\begin_layout Standard
+The term 
+\begin_inset Quotes eld
+\end_inset
+
+deep learning
+\begin_inset Quotes erd
+\end_inset
+
+ appeals to a more general principle of learning 
+\emph on
+mutliple levels of compositions, 
+\emph default
+not necessarily neurally inspired.
+ The earliest predecessors of modern deep learning were simple linear models
+ motivated from a neuroscientific perspective.
+ e.g.
+ the McCulloch-Pitts neuron, ADALINE.
+ Slightly modified versions of the stochastic gradient descent algorithm
+ remian the dominant training algorithm for deep learning models today.
+ Most neural networks today are based on a model neuron called the rectified
+ linear unit.
+ The original cognitron (Fukushima, 1975) introduced a more complicated
+ version that was highly inspired by our knowledge of brain function.
+ Today, neuroscience is regarded as an important source of inspiration for
+ deep learning researchers, but it is no longer the predominant guide for
+ the field.
+ Actual neurons compute very different functions than modern rectified linear
+ units, but greater neural realism has not yet led to an improvement in
+ machine learning performance.
+\end_layout
+
+\begin_layout Standard
+The central idea in connectionism is that a large number of simple computational
+ units can achieve intelligent behavior when networked together.
+ One of these concepts is that of distributed representation.
+ Another major accomplishment of the connectionist movement was the suc-
+ cessful use of back-propagation to train deep neural networks with internal
+ repre- sentations and the popularization of the back-propagation algorithm.
+\end_layout
+
+\begin_layout Standard
+The third wave of neural networks research began with a breakthrough in
+ 2006.
+ This wave of neural networks research popularized the use of the term “deep
+ learning” to emphasize that researchers were now able to train deeper neural
+ networks than had been possible before, and to focus attention on the theoretic
+al importance of depth.
+\end_layout
+
+\begin_layout Section
+The age of Big Data
+\end_layout
+
+\begin_layout Standard
+The age of Big Data has made machine learning much easier because the key
+ burden of statistical estimation—generalizing well to new data after observing
+ only a small amount of data has been considerably lightened.
+\end_layout
+
+\begin_layout Section
+Increasing Model Sizes
+\end_layout
+
+\begin_layout Standard
+Since the introduction of hidden units, artificial neural networks have
+ doubled in size roughly every 2.4 years.
+ This growth is driven by faster computers with larger memory and by the
+ availability of larger datasets.
+ Larger networks are able to achieve higher accuracy on more complex tasks.
+ The increase in model size over time, due to the availability of faster
+ CPUs, the advent of general purpose GPUs , faster network connectivity
+ and better software infrastructure for distributed computing, is one of
+ the most important trends in the history of deep learning.
+\end_layout
+
+\begin_layout Section
+Increasing Accuracy, Complexity and Real-World Impact
+\end_layout
+
+\begin_layout Standard
+Since the 1980s, deep learning has consistently improved in its ability
+ to provide accurate recognition and prediction.
+ Moreover, deep learning has consistently been applied with success to broader
+ and broader sets of applications.
+ 
+\end_layout
+
+\begin_layout Standard
+Another crowning achievement of deep learning is its extension to the domain
+ of reinforcement learning.
+ In the context of reinforcement learning, an autonomous agent must learn
+ to perform a task by trial and error, without any guidance from the human
+ operator.
+ 
+\end_layout
+
+\begin_layout Section
+Convolutional Networks
+\end_layout
+
+\begin_layout Standard
+Convolutional networks (LeCun, 1989), also known as convolutional neural
+ networks, or CNNs, are a specialized kind of neural network for processing
+ data that has a known grid-like topology.
+ Convolutional networks are simply neural networks that use convolution
+ in place of general matrix multiplication in at least one of their layers.
+ 
+\end_layout
+
+\begin_layout Standard
+Usually, the operation used in a convolutional neural network does not correspon
+d precisely to the definition of convolution as used in other fields, such
+ as engineering or pure mathematics.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+s\left(t\right) & =\int x\left(a\right)w\left(t-a\right)da\\
+ & =\sum_{a=-\infty}^{\infty}x\left(a\right)w\left(t-a\right)
+\end{align*}
+
+\end_inset
+
+ 
+\begin_inset Formula $x$
+\end_inset
+
+ is referred to as 
+\emph on
+input
+\emph default
+ and 
+\begin_inset Formula $w$
+\end_inset
+
+ as 
+\emph on
+kernel.
+ 
+\emph default
+the output 
+\begin_inset Formula $s$
+\end_inset
+
+ sometimes as 
+\emph on
+feature map
+\emph default
+.
+ In machine learning applications, the input is usually a multidimensional
+ array of data, and the kernel is usually a multidimensional array of parameters
+ that are adapted by the learning algorithm.
+\end_layout
+
+\begin_layout Standard
+Many neural network libraries implement a related function called the cross-corr
+elation, which is the same as convolution but without flipping the kernel.
+ Many machine learning libraries implement cross-correlation but call it
+ convolution.
+ In the context of machine learning, the learning algorithm will learn the
+ appropriate values of the kernel in the appropriate place, so an algorithm
+ based on convolution with kernel flipping will learn a kernel that is flipped
+ relative to the kernel learned by an algorithm without the flipping.
+ Discrete convolution can be viewed as multiplication by a matrix, but the
+ matrix has several entries constrained to be equal to other entries.
+ convolution usually corresponds to a very sparse matrix (a matrix whose
+ entries are mostly equal to zero).
+\end_layout
+
+\end_body
+\end_document
