@@ -1,19 +1,27 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
 \save_transient_properties true
 \origin unavailable
-\textclass article
+\textclass book
 \use_default_options true
+\begin_modules
+algorithm2e
+theorems-ams-chap-bytype
+theorems-ams-extended-chap-bytype
+tabs-within-sections
+figs-within-sections
+eqs-within-sections
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "times" "default"
-\font_sans "default" "default"
-\font_typewriter "default" "default"
+\font_roman "tgtermes" "default"
+\font_sans "tgheros" "default"
+\font_typewriter "tgcursor" "default"
 \font_math "auto" "auto"
 \font_default_family default
 \use_non_tex_fonts false
@@ -21,6 +29,8 @@
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -50,6 +60,7 @@
 \suppress_date false
 \justification true
 \use_refstyle 1
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -62,7 +73,10 @@
 \tocdepth 4
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -76,84 +90,111 @@
 \begin_body
 
 \begin_layout Standard
-\begin_inset Graphics
-	filename pasted5.png
-	lyxscale 80
-	scale 80
+The definitions in this note may not be taken as formal definitions, mere
+ explanations.
+\end_layout
 
+\begin_layout Chapter
+Intro
+\end_layout
+
+\begin_layout Standard
+Abstract and formal tasks that are among the most diffuclt mental undertakings
+ for a human being are among the easiest for a computer.
+\end_layout
+
+\begin_layout Definition
+Knowledge base approach
+\end_layout
+
+\begin_layout Definition
+A computer reason about statements in formal languages automatically using
+ logical inference rules.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+machine learning
+\end_layout
+
+\begin_layout Definition
+the capability for AI systems to acquire knowledge by extracting patterns
+ from raw data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
 \end_inset
 
 
 \end_layout
 
 \begin_layout Standard
+Machine learning algorithms rely heavily on the representation of data,
+ what the features are.
+\end_layout
 
-\emph on
-Knowledge base approach: 
-\emph default
-Reasoning automatically about statements in fomral languages using logical
- inference rules, seeking to hardcode knowledge about the world in formal
- languages.
+\begin_layout Definition
+representation learning
+\end_layout
+
+\begin_layout Definition
+Using machine learning to discover not only the mapping form representation
+ to output but also the representation itself.
+\end_layout
+
+\begin_layout Example*
+Autoencoder: the combination of an encoer that converts the input data into
+ a different representation and a decoder that converts it back into the
+ original format.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Separator plain
+\end_inset
 
-\emph on
-Machine learning: 
-\emph default
-AI systems need the ability to acquire their own knowledge by extracting
- patterns from raw data.
- The introduction of machine learning enabled computers to tackle problems
- involving knowledge of the real world and make decisions that appear subjective.
+
+\end_layout
+
+\begin_layout Definition
+factors of variation
+\end_layout
+
+\begin_layout Definition
+sources of incluence that help us make sense of the rich variability in
+ the data
 \end_layout
 
 \begin_layout Standard
-The performance of simple machine learning algorithms depends heavily on
- the representation of the data they are given.
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Deep learning
+\end_layout
+
+\begin_layout Definition
+Deep learning learns the right represetation for the data, allowing the
+ computer to learn a multi-stp computer program.
 \end_layout
 
 \begin_layout Standard
-
-\emph on
-Representation learning: 
-\emph default
-Machine learning can discover not only the mapping from representation to
- output but also the representation itself, which enables AI systems to
- rapidly adapt to new tasks, with minimal human intervention.
- 
+The depth of computational graph or the depth of the graph describing how
+ concepts are related to each other (the depth of the probabilistic modeling
+ graph).
 \end_layout
 
-\begin_layout Standard
-e.g.
- 
-\series bold
-autoencoder: 
-\series default
-both the encoder and the decoder are trained to make the new representation
- ahve various nice properties.
-\end_layout
-
-\begin_layout Standard
-It can be very difficult to extract such high-level, abstract features from
- raw data.
- Deep learning solves this central problem in representation learning by
- intro- ducing representations that are expressed in terms of other, simpler
- representations.
- 
-\end_layout
-
-\begin_layout Standard
-e.g.
- 
-\series bold
-multilayer perceptron.
-\end_layout
-
-\begin_layout Standard
-The idea of learning the right representation for the data provides one
- per- spective on deep learning.
- Another perspective on deep learning is that depth enables the computer
- to learn a multistep computer program.
+\begin_layout Example*
+multilayer perceptron
 \end_layout
 
 \begin_layout Standard
@@ -172,6 +213,233 @@ There are two main ways of measuring the depth of a model.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Part
+Mathematical Basics
+\end_layout
+
+\begin_layout Chapter
+Numerical computation basics
+\end_layout
+
+\begin_layout Section
+Overflow and underflow
+\end_layout
+
+\begin_layout Standard
+Underflow occurs when numbers near zero are rounded to zero.
+ Many functions behave qualitatively differently when their argument is
+ zero rather than a small positive number.
+\end_layout
+
+\begin_layout Standard
+Overflow occurs when numbers with large magnitutde are approximated as 
+\begin_inset Formula $\infty$
+\end_inset
+
+ or 
+\begin_inset Formula $-\infty$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+\begin_inset CommandInset href
+LatexCommand href
+name "Softmax"
+target "https://en.wikipedia.org/wiki/Softmax_function"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+The standard (unit) softmax function 
+\begin_inset Formula $\sigma\colon\mathbb{R}^{K}\to\mathbb{R}^{K}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\sigma\left(\mathbf{z}\right)_{i}=\frac{e^{z_{i}}}{\sum_{j=1}^{K}e^{z_{j}}}\quad\text{for }i=1,\dots,K\text{ and }\mathbf{z}=\left(z_{1},\dots,z_{K}\right)\in\mathbb{R}^{K}
+\]
+
+\end_inset
+
+The output of the softmax function can be used to represent a categorical
+ distribution, a probability distribution over 
+\begin_inset Formula $K$
+\end_inset
+
+ different outcomes.
+\end_layout
+
+\begin_layout Example*
+Given a very large or small 
+\begin_inset Formula $z_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $e^{z_{i}}$
+\end_inset
+
+ may go to infinity.
+ THe value of the softmax function is not changed analytically by adding
+ or subtracting a scalar from the input, which leads to the solution 
+\begin_inset Formula $z=x-\max_{i}x_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Poor Condition
+\end_layout
+
+\begin_layout Definition
+Conditioning
+\end_layout
+
+\begin_layout Definition
+the rate in which a funciton changes w.r.t.
+ small changes in its inputs.
+\end_layout
+
+\begin_layout Remark
+Funcitons that change rapidly when their inputs are perturbed slightly can
+ be problematic for scientific computation because rounding errors int heinputs
+ cna result in large changes in the output.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Gradient-Based optimization
+\end_layout
+
+\begin_layout Standard
+terminology here: cost function = loss function = error function
+\end_layout
+
+\begin_layout Subsection
+Gradient descent
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $f\left(x-\varepsilon\text{sign}\left(f^{\prime}\left(x\right)\right)\right)$
+\end_inset
+
+ is less than 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ for small enough 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+, thus we can reduce 
+\begin_inset Formula $f\left(x\right)$
+\end_inset
+
+ by moving 
+\begin_inset Formula $x$
+\end_inset
+
+ in small steps with opposite sign of the derivative.
+\end_layout
+
+\begin_layout Standard
+For functions with multiple inputs, to minimize 
+\begin_inset Formula $f$
+\end_inset
+
+ and find the direction in which 
+\begin_inset Formula $f$
+\end_inset
+
+ decreases the fastest
+\begin_inset Formula 
+\[
+\underset{u,\left\lVert u\right\rVert =1}{\min}u^{T}\triangledown_{x}f\left(x\right)=\underset{u,\left\lVert u\right\rVert =1}{\min}\left\lVert u\right\rVert \left\lVert \triangledown_{x}f\left(x\right)\right\rVert \cos\theta
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is the angle between 
+\begin_inset Formula $u$
+\end_inset
+
+ and the gradient.
+ This can simplifies to 
+\begin_inset Formula 
+\[
+\underset{u}{\min}\cos\theta
+\]
+
+\end_inset
+
+where the gradient points uphill.
+ Thus we should decrease 
+\begin_inset Formula $f$
+\end_inset
+
+ by moving in the direction of the negative gradient, giving the following
+ algorithm
+\begin_inset Formula 
+\[
+\boldsymbol{x}^{\prime}=\boldsymbol{x}-\varepsilon\triangledown_{x}f\left(\boldsymbol{x}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is the 
+\emph on
+learning rate, 
+\emph default
+a positive scalar determining the size of the step.
+ A popular approach to set 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ it a small constant.
+ Another approach is to evaluate 
+\begin_inset Formula $f\left(x-\epsilon\triangledown_{x}f\left(x\right)\right)$
+\end_inset
+
+ for several values of 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ and choose the one that results in the smallest objective function value,
+ which method is called a 
+\emph on
+line search
+\emph default
+.
 \end_layout
 
 \begin_layout Section
