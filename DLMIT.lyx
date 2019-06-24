@@ -1,5 +1,5 @@
-#LyX 2.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 544
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -29,8 +29,6 @@ eqs-within-sections
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
-\use_microtype false
-\use_dash_ligatures false
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -60,7 +58,6 @@ eqs-within-sections
 \suppress_date false
 \justification true
 \use_refstyle 1
-\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -73,10 +70,7 @@ eqs-within-sections
 \tocdepth 4
 \paragraph_separation indent
 \paragraph_indentation default
-\is_math_indent 0
-\math_numbering_side default
-\quotes_style english
-\dynamic_quotes 0
+\quotes_language english
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -250,7 +244,6 @@ Overflow occurs when numbers with large magnitutde are approximated as
 LatexCommand href
 name "Softmax"
 target "https://en.wikipedia.org/wiki/Softmax_function"
-literal "false"
 
 \end_inset
 
@@ -440,6 +433,174 @@ a positive scalar determining the size of the step.
 line search
 \emph default
 .
+\end_layout
+
+\begin_layout Section
+Jacobian and Hessian Matrix
+\end_layout
+
+\begin_layout Standard
+The second derivative can be seen as 
+\emph on
+curvature.
+\end_layout
+
+\begin_layout Standard
+The Hessian matrix of continuous functions has the property that 
+\begin_inset Formula 
+\[
+H_{i,j}=H_{j,i}
+\]
+
+\end_inset
+
+which is the case for most of the functions in the context of deep learning.
+\end_layout
+
+\begin_layout Subsection
+The optimal step size and Hessian matrix
+\end_layout
+
+\begin_layout Standard
+About the second derivative, 
+\begin_inset CommandInset href
+LatexCommand href
+name "here"
+target "https://math.stackexchange.com/questions/2573376/second-directional-derivative-and-hessian-matrix"
+
+\end_inset
+
+.
+ The second directional derivative is represented 
+\begin_inset Formula 
+\[
+d^{T}Hd
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $d$
+\end_inset
+
+ is the unit vector in that direction.
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Decompose the Hessian matrix into"
+target "https://en.wikipedia.org/wiki/Symmetric_matrix#Decomposition"
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+d^{T}Q\Lambda Q^{T}d.
+\]
+
+\end_inset
+
+The directional second derivative is a weighted average of all of the eigenvalue
+s, with weights between 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $1$
+\end_inset
+
+ and eigenvectors that have smaller angle with 
+\begin_inset Formula $d$
+\end_inset
+
+ receiving more weight.
+\end_layout
+
+\begin_layout Standard
+By Taylor series and gradient descent
+\begin_inset Formula 
+\[
+f\left(x^{\left(0\right)}-\epsilon g\right)\approx f\left(x^{\left(0\right)}\right)-\epsilon g^{T}g+\frac{1}{2}\epsilon^{2}g^{T}Hg.
+\]
+
+\end_inset
+
+The last two terms determine how gradient descent performs.
+ When 
+\begin_inset Formula $g^{T}Hg$
+\end_inset
+
+ is positive, the optimal step size that decreases 
+\begin_inset Formula $f$
+\end_inset
+
+ (why?)
+\begin_inset Formula 
+\[
+\epsilon^{*}=\frac{g^{T}g}{g^{T}Hg}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Second derivative and local minimum/maximum
+\end_layout
+
+\begin_layout Standard
+At a critical point, it is possible to examine the eigenvalues of the Hessianto
+ determine whether the critical point is a local maximum, local minimum,
+ or saddle point.
+ By inspecting the second directional derivative
+\begin_inset Formula 
+\[
+d^{T}Hd
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+1.
+ 
+\begin_inset Formula $H$
+\end_inset
+
+ positive definite, the point is a local mininum;
+\end_layout
+
+\begin_layout Standard
+2.
+ 
+\begin_inset Formula $H$
+\end_inset
+
+ negative definite, the point is a local maximum.
+\end_layout
+
+\begin_layout Standard
+There might be cases where one eigenvalue of 
+\begin_inset Formula $H$
+\end_inset
+
+ is positive and another is nagative, which implies a saddle point.
+\end_layout
+
+\begin_layout Subsection
+Condition number of Hessian matrix
+\end_layout
+
+\begin_layout Standard
+When the Hessian has a poor condition number, gradient descent performs
+ poorly.
+ Gradient descent is unaware of this change in the derivative so it does
+ nto know that it needs to explore preferentially in the direction where
+ the derivative remains nagative for longer.
+ It also makes it difficult to choose a good step size.
 \end_layout
 
 \begin_layout Section
