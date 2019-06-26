@@ -1,5 +1,5 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -29,6 +29,8 @@ eqs-within-sections
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -58,6 +60,7 @@ eqs-within-sections
 \suppress_date false
 \justification true
 \use_refstyle 1
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -70,7 +73,10 @@ eqs-within-sections
 \tocdepth 4
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -244,6 +250,7 @@ Overflow occurs when numbers with large magnitutde are approximated as
 LatexCommand href
 name "Softmax"
 target "https://en.wikipedia.org/wiki/Softmax_function"
+literal "false"
 
 \end_inset
 
@@ -467,6 +474,7 @@ About the second derivative,
 LatexCommand href
 name "here"
 target "https://math.stackexchange.com/questions/2573376/second-directional-derivative-and-hessian-matrix"
+literal "false"
 
 \end_inset
 
@@ -489,6 +497,7 @@ where
 LatexCommand href
 name "Decompose the Hessian matrix into"
 target "https://en.wikipedia.org/wiki/Symmetric_matrix#Decomposition"
+literal "false"
 
 \end_inset
 
@@ -601,6 +610,164 @@ When the Hessian has a poor condition number, gradient descent performs
  nto know that it needs to explore preferentially in the direction where
  the derivative remains nagative for longer.
  It also makes it difficult to choose a good step size.
+\end_layout
+
+\begin_layout Subsection
+Newton's method
+\end_layout
+
+\begin_layout Standard
+To avoid the above issue, one can use information from Hessian matrix to
+ guide the search.
+ The simplest method is known as Newton's method.
+\end_layout
+
+\begin_layout Standard
+Solve for the critical point of the second-order Taylor series expansion
+ of 
+\begin_inset Formula $f$
+\end_inset
+
+ near some point 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\mathbf{x}^{*}=\mathbf{x}^{\left(0\right)}-H\left(f\right)\left(\mathbf{x}^{\left(0\right)}\right)^{-1}\triangledown_{x}f\left(\mathbf{x}^{\left(0\right)}\right).
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When 
+\begin_inset Formula $f$
+\end_inset
+
+ is positive definite quadratic function, this method can be applied to
+ compute the minumum directly.
+ Otherwise, iteratively applying this method can reach the critical point
+ much faster thatn gradient descent.
+ However, this method is not suitable for saddle point case.
+\end_layout
+
+\begin_layout Standard
+Deep learning algorithms tend to lack guarantees because the family of functions
+ used in deep learning is quite complicated.
+ The dominant approach in many other fields to optimization is to design
+ optimization algorithms for a limited family of functions.
+\end_layout
+
+\begin_layout Standard
+Lipschitz continuity and convex optimization may give good guarantee.
+ Convex optimization is used only as a subroutine of some deep learning
+ algorithms since most problems in deep learning are difficult to express
+ in terms of convex optimization.
+\end_layout
+
+\begin_layout Section
+Constrained Optimization
+\end_layout
+
+\begin_layout Standard
+One simple approach to constrained optimization is to modify gradient descent
+ taking the constraint into account.
+\end_layout
+
+\begin_layout Standard
+Another sophisticated approach is to design a different unconstrained optimizati
+on whose solution can be converted into a solution to the original constrained
+ optimization problem.
+ e.g.
+ converting a optimization with constrained that 
+\begin_inset Formula $x$
+\end_inset
+
+ have exactly unit norm into 
+\begin_inset Formula $g\left(\theta\right)=f\left(\left[\cos\theta,\sin\theta\right]\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+A very general solution to contrained optimization is Karush-Kuhn-Tucker
+ appraoch.
+ The constrained set is described by a set of equalities and inequalites
+\begin_inset Formula 
+\[
+S=\left\{ \mathbf{x}|\forall i,g^{\left(i\right)}\left(\mathbf{x}\right)=0\text{ and }\forall j,h^{\left(i\right)}\left(\mathbf{x}\right)\leq0\right\} .
+\]
+
+\end_inset
+
+The generalized Lagrangian is defined as
+\begin_inset Formula 
+\[
+L\left(\mathbf{x},\lambda,\alpha\right)=f\left(\mathbf{x}\right)+\sum_{i}\lambda_{i}g^{\left(i\right)}\left(\mathbf{x}\right)+\sum_{j}\alpha_{j}h^{\left(j\right)}\left(\mathbf{x}\right).
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\lambda_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ are called 
+\emph on
+KKT mutlipliers, 
+\emph default
+which functions is unconstraiend.
+ As 
+\begin_inset Formula 
+\[
+\max_{\lambda}\max_{\alpha,\alpha\geq0}L\left(\mathbf{x},\mathbf{\lambda},\alpha\right)=f\left(x\right)
+\]
+
+\end_inset
+
+while violated constraints result in 
+\begin_inset Formula 
+\[
+\max_{\lambda}\max_{\alpha,\alpha\geq0}L\left(\mathbf{x},\mathbf{\lambda},\alpha\right)=\infty.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A simple set of necessary properties describe the optimal points of constained
+ optimization problems:
+\end_layout
+
+\begin_layout Enumerate
+The gradient of the generalized Langrangian is zero;
+\end_layout
+
+\begin_layout Enumerate
+All constraints on both 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and the KKT multipliers are satisfied;
+\end_layout
+
+\begin_layout Enumerate
+the inequality constraints exhibit complementary slackness: 
+\begin_inset Formula $\alpha\odot h\left(x\right)=0$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
