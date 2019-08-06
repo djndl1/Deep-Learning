@@ -288,7 +288,7 @@ Given a very large or small
 \end_inset
 
  may go to infinity.
- THe value of the softmax function is not changed analytically by adding
+ The value of the softmax function is not changed analytically by adding
  or subtracting a scalar from the input, which leads to the solution 
 \begin_inset Formula $z=x-\max_{i}x_{i}$
 \end_inset
@@ -318,8 +318,8 @@ the rate in which a funciton changes w.r.t.
 
 \begin_layout Remark
 Funcitons that change rapidly when their inputs are perturbed slightly can
- be problematic for scientific computation because rounding errors int heinputs
- cna result in large changes in the output.
+ be problematic for scientific computation because rounding errors in the
+ inputs can result in large changes in the output.
 \end_layout
 
 \begin_layout Standard
@@ -768,6 +768,327 @@ the inequality constraints exhibit complementary slackness:
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Machine Learning Basics
+\end_layout
+
+\begin_layout Standard
+Machine learning is essentially a form of applied statistics with increased
+ emphasis on the use of computers to statistically estimate complicated
+ functions and a decreased emphasis on proving confidence intervals around
+ these funcitons.
+\end_layout
+
+\begin_layout Standard
+The challenge of fitting the training data differs from the chanllenge of
+ finding patterns that generalizes to new data.
+ Most machine learning algorithms have settings called 
+\emph on
+hyperparameters
+\emph default
+ that must be determined external to the learning algorithm itself.
+\end_layout
+
+\begin_layout Section
+Learning Algorithms, What Is That?
+\end_layout
+
+\begin_layout Definition*
+A computer program is said to learn from experience 
+\begin_inset Formula $E$
+\end_inset
+
+ with respect to some class of tasks 
+\begin_inset Formula $T$
+\end_inset
+
+ and performance measure 
+\begin_inset Formula $P$
+\end_inset
+
+, if its performance at tasks in 
+\begin_inset Formula $T$
+\end_inset
+
+ ,as measured by 
+\begin_inset Formula $P$
+\end_inset
+
+, improves with experience 
+\begin_inset Formula $E$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition*
+Machine learning tasks are usually described in terms of how the machine
+ learning system should process an example, a collection of features that
+ have been quantitively measured from some object or event that we want
+ the machine learning systems to process.
+ These tasks can be classfication, classification with missing inputs (in
+ which case, a set of functions each of which deals with a subset of the
+ input vector must be found), regression, transcript (OCR, speech recognition
+ et al.), machine translation, 
+\begin_inset CommandInset href
+LatexCommand href
+name "structured output"
+target "https://en.wikipedia.org/wiki/Structured_prediction"
+literal "false"
+
+\end_inset
+
+ (parsed tree, image segmentation, image caption), anomaly detection, synthesis
+ and sampling, imputation of missing values, denoising, density eestimation.
+\end_layout
+
+\begin_layout Definition*
+THe perfomance measure 
+\begin_inset Formula $P$
+\end_inset
+
+ is usually specific to the task 
+\begin_inset Formula $T$
+\end_inset
+
+ being carried out by the system.
+ For tasks such as classification, classification with missing inputs, and
+ transcription, we measure the 
+\emph on
+accuracy
+\emph default
+ of the model, or 
+\emph on
+error rate
+\emph default
+.
+ For tasks such as density estimation, the most common approach is to report
+ the average log-probability the model assigns to some examples.
+ We evaluate the performance measure using a 
+\emph on
+test set 
+\emph default
+of data that is separate from the data used for training.
+\end_layout
+
+\begin_layout Definition*
+Machine learning algorithms can be broadly categorized as 
+\emph on
+unsupervised
+\emph default
+ or 
+\emph on
+supervised
+\emph default
+ by what kind of experience they are allowed to have during the learning
+ process.
+ Unsupervised learning and supervised learning are not formally defined
+ terms.
+ The lines between them are often blurred.
+ The chain rule decomposition means that we can solve the ostensibly unsupervise
+d problem into 
+\begin_inset Formula $n$
+\end_inset
+
+ supervised learning problems.
+ Some machine learning algorithms do not just experience a fixed dataset
+ (reinforcement learning algorithms interact with an environment).
+ Most machine learning algorithms simply experience a dataset.
+ One common way of describing a dataset is with a 
+\emph on
+design
+\emph default
+ 
+\emph on
+matrix
+\emph default
+.
+ A design matrix is a matrix containing a different example in each row.
+ Each column of the matrix corresponds to a different feature.
+\end_layout
+
+\begin_layout Section
+Capacity, Overfitting and Underfitting
+\end_layout
+
+\begin_layout Standard
+The central challenge in machine learning is that we must perform well on
+ new, previously unseen inputs.
+ The factors determining how well a machine learning algorithm will perform
+ are its ability to make the training error small and make the gap between
+ training and test error small.
+ We first assume the underlying 
+\emph on
+data generating distribution 
+\emph default
+is independently indentically distributed.
+\end_layout
+
+\begin_layout Standard
+We can control whether a model is more likely to overfit or underfit by
+ altering its 
+\emph on
+capacity
+\emph default
+ (a model’s capacity is its ability to fit a wide variety of funcitons).
+ One way to control the capacity of a learning algorithm is by choosing
+ its 
+\emph on
+hypothesis
+\emph default
+ 
+\emph on
+space
+\emph default
+, the set of functions that the learning algorithm is allowed to select
+ as being the solution (like linear regression is restricted to lineear
+ functions).
+ Machine learning algorithms will generally perform best when their capacity
+ is appropriate for the true complexity of the task they need to perform
+ and the amount of training data they are provided with.
+ The capacity of a model is not only determined by its 
+\emph on
+representational capacity.
+ 
+\emph default
+Additional limitations such as the imperfection of the optimization algorithm
+ can make the 
+\emph on
+effective capacity 
+\emph default
+less thant the representational capacity of the model family.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+\begin_inset CommandInset href
+LatexCommand href
+name "Vapnik-Chervonenkis dimension"
+target "https://en.wikipedia.org/wiki/Vapnik–Chervonenkis_dimension"
+literal "false"
+
+\end_inset
+
+ 
+\emph default
+is the most well-known means of quantifying model capacity.
+ 
+\begin_inset Formula $H$
+\end_inset
+
+ can be seen as a set of functions and 
+\begin_inset Formula $C$
+\end_inset
+
+ is the data set.
+ The VC dimension of 
+\begin_inset Formula $H$
+\end_inset
+
+ is the cardinality of the data set that 
+\begin_inset Formula $H$
+\end_inset
+
+ covers.
+ The most important results in statistical learning theory show that the
+ discrepancy between training error and generalization error is bounded
+ from above by a quantity that grows as the model capacity grows but shrinks
+ as the number of training examples increases.
+\end_layout
+
+\begin_layout Standard
+Non-parametric models???? TODO
+\end_layout
+
+\begin_layout Standard
+Bayes Error ???
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+no free lunch theorem
+\emph default
+ for machine learning states that averaged over all possible data generating
+ distributions, every classifcation algorithm has the smae error rate when
+ classifying prevously unobserved points.
+ In other words, no machine learning algorithm is universally any better
+ than any other.
+ However, if we make assumptions about the kinds of probability distributions
+ we encounter in real-world applications, we can design learning algorithms
+ that perform well on these distributions.
+ The goal of machine learning research is not to seek a universal learning
+ algorithm or the absolute best learning algorithm.
+\end_layout
+
+\begin_layout Standard
+The behavior of our algorithm is strongly affected not just by how large
+ we make the set of functions allowed in its hypothesis space, but by the
+ specific identity of those functions.
+ We can give a learning algorithm a preference for one solution in its hypothesi
+s space to another.
+ Weight decay is a kind of perference added to a cost function.
+ Expressing preferences for one function over another is a more general
+ way of controlling a model’s capacity than including or excluding members
+ from the hypothesis space.
+ Regularization is any modification we make to a learning algorithm that
+ is intended to reduce its generalization error but not its training error.
+ Regularization is one of the central concerns of the field of machine learning,
+ rivaled by its importantce only by 
+\emph on
+optimization.
+\end_layout
+
+\begin_layout Section
+Hyperparameters and Validation Sets
+\end_layout
+
+\begin_layout Standard
+Most machine learning algorithms have several settings that we can use to
+ control the behavior of the learning algorithm, called 
+\emph on
+hyperparameters
+\emph default
+.
+ To choose a proper hyperparameter, we need a 
+\emph on
+validation set 
+\emph default
+of examples that the training algorithm does not observe.
+ We construct the validation set from the training data.
+ The validation set is used to estimate the generalization error during
+ or after training, allowing for the hyperparameteres to be updated accordingly.
+ Typically, 
+\begin_inset Formula $80\%$
+\end_inset
+
+ of the training data for training and 
+\begin_inset Formula $20\%$
+\end_inset
+
+ for validation.
+\end_layout
+
+\begin_layout Standard
+When the dataset is too small to be divided into disjoint parts, we use
+ cross-validation.
+ It is based on the idea of repeating the training and testing computation
+ on different randomly chosen subsets or splits of the original dataset.
+ The most common of these is the 
+\begin_inset Formula $k$
+\end_inset
+
+-fold cross validation procedure.
 \end_layout
 
 \begin_layout Section
